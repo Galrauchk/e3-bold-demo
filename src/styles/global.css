@@ -1,0 +1,156 @@
+/* ===================================
+   E3 BOLD — Global CSS
+   Voltix Électricité · Marseille
+=================================== */
+
+:root {
+  --navy-dark: #0a0f1e;
+  --navy-medium: #0d1a3a;
+  --cyan: #00e5ff;
+  --blue: #0066ff;
+  --white: #ffffff;
+  --slate-400: #94a3b8;
+  --gray-700: #374151;
+  --gradient-cta: linear-gradient(135deg, #00e5ff, #0066ff);
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --section-py: 5rem;
+  --max-width: 1152px;
+  --container-px: 1.5rem;
+  --radius-btn: 0.5rem;
+  --radius-card: 0.75rem;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--gray-700);
+  background: var(--navy-dark);
+  overflow-x: hidden;
+}
+
+img, svg { display: block; max-width: 100%; }
+a { text-decoration: none; }
+
+/* ── Animations ── */
+@keyframes pulse-ring {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+/* ── Container ── */
+.container {
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-px);
+  padding-right: var(--container-px);
+}
+
+/* ── Section ── */
+.section { padding: var(--section-py) 0; }
+.section--dark  { background: var(--navy-dark); }
+.section--white { background: var(--white); }
+.text-center { text-align: center; }
+
+/* ── Labels ── */
+.section-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--cyan);
+  margin-bottom: 0.75rem;
+}
+
+/* ── Headings ── */
+.section-title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1.25rem;
+}
+.section-title--dark  { color: var(--white); }
+.section-title--light { color: var(--navy-dark); }
+
+.section-body--dark  { color: var(--slate-400); }
+.section-body--light { color: var(--gray-700); }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-btn);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+.btn--gradient {
+  background: var(--gradient-cta);
+  color: var(--navy-dark);
+  box-shadow: 0 0 20px rgba(0,229,255,0.25);
+  border: none;
+}
+.btn--gradient:hover {
+  box-shadow: 0 0 32px rgba(0,229,255,0.5);
+  transform: translateY(-1px);
+}
+.btn--outline {
+  background: transparent;
+  color: var(--cyan);
+  border: 1.5px solid rgba(0,229,255,0.4);
+}
+.btn--outline:hover {
+  border-color: var(--cyan);
+  background: rgba(0,229,255,0.06);
+}
+
+/* ── Floating CTA ── */
+.floating-cta-wrap {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  z-index: 999;
+}
+.floating-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--gradient-cta);
+  color: var(--navy-dark);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 800;
+  padding: 0.875rem 1.5rem;
+  border-radius: 50px;
+  box-shadow: 0 0 30px rgba(0,229,255,0.45);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.floating-cta::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50px;
+  border: 2px solid rgba(0,229,255,0.55);
+  animation: pulse-ring 1.6s ease-out infinite;
+  pointer-events: none;
+}

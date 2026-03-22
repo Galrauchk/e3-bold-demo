@@ -1,0 +1,267 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const services = [
+  {
+    id: 'depannage',
+    icon: `<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="#00e5ff"/>`,
+    iconStroke: false,
+    title: 'Dépannage Électrique Urgent',
+    price: 'Dès 89 € HT',
+    tag: 'URGENCE 24H/7J',
+    desc: "Une panne électrique peut survenir à tout moment et paralyser votre quotidien. Chez Voltix Électricité, nous intervenons dans les 2 heures pour tout dépannage électrique urgent à Marseille. Nos techniciens certifiés diagnostiquent rapidement la panne — disjoncteur défaillant, court-circuit, surcharge, prise électrique hors service — et rétablissent votre installation en toute sécurité.",
+    points: [
+      'Intervention sous 2h dans les 16 arrondissements',
+      'Disponible 24h/24, 7j/7, jours fériés inclus',
+      'Diagnostic inclus dans le prix d\'intervention',
+      'Remplacement immédiat des pièces défectueuses',
+      'Rapport d\'intervention remis à chaque client',
+    ],
+  },
+  {
+    id: 'tableau',
+    icon: `<rect x="2" y="3" width="20" height="18" rx="2"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/><line x1="2" y1="12" x2="22" y2="12"/>`,
+    iconStroke: true,
+    title: 'Installation Tableau Électrique',
+    price: 'Sur devis',
+    tag: 'MISE AUX NORMES',
+    desc: "Le tableau électrique est le cœur de votre installation. Un tableau vétuste ou sous-dimensionné est source de pannes et représente un risque incendie. Voltix Électricité assure le remplacement ou l'installation de tableaux électriques conformes aux normes NF C 15-100 en vigueur, avec disjoncteurs différentiels, protection parafoudre et repérage des circuits.",
+    points: [
+      'Remplacement de tableaux anciens (fusibles, ancien normalisé)',
+      'Installation de disjoncteurs différentiels 30 mA',
+      'Protection parafoudre selon le secteur',
+      'Repérage et étiquetage des circuits',
+      'Rapport CONSUEL fourni',
+    ],
+  },
+  {
+    id: 'normes',
+    icon: `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>`,
+    iconStroke: true,
+    title: 'Mise aux Normes NF C 15-100',
+    price: 'Sur devis',
+    tag: 'CONFORMITÉ',
+    desc: "La norme NF C 15-100 est la référence française pour les installations électriques résidentielles. Son respect est obligatoire pour la sécurité des occupants et indispensable lors d'une transaction immobilière. Voltix Électricité réalise le diagnostic complet de votre installation, identifie les non-conformités et effectue tous les travaux nécessaires pour obtenir la conformité CONSUEL.",
+    points: [
+      'Diagnostic complet de l\'installation existante',
+      'Rapport de non-conformités détaillé',
+      'Travaux de mise en conformité complets',
+      'Obtention de l\'attestation CONSUEL',
+      'Éligible aux aides MaPrimeRénov\' (certifié RGE)',
+    ],
+  },
+  {
+    id: 'domotique',
+    icon: `<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>`,
+    iconStroke: true,
+    title: 'Domotique & Automatismes',
+    price: 'Sur devis',
+    tag: 'MAISON CONNECTÉE',
+    desc: "Transformez votre logement en maison intelligente avec nos solutions domotiques sur mesure. Voltix Électricité conçoit et installe des systèmes d'automatisation compatibles avec les principaux assistants vocaux (Google Home, Amazon Alexa, Apple HomeKit). Contrôle de l'éclairage, des volets, du chauffage et de la sécurité depuis votre smartphone.",
+    points: [
+      'Éclairage connecté (Philips Hue, Legrand, Schneider)',
+      'Volets roulants motorisés et pilotés',
+      'Thermostat intelligent (Netatmo, Nest, Atlantic)',
+      'Alarme et interphonie connectée',
+      'Compatible Google Home, Alexa, HomeKit',
+    ],
+  },
+  {
+    id: 'led',
+    icon: `<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>`,
+    iconStroke: true,
+    title: 'Éclairage LED Professionnel',
+    price: 'Dès 149 € HT',
+    tag: 'ÉCONOMIES D\'ÉNERGIE',
+    desc: "Passez à l'éclairage LED et réduisez votre consommation électrique jusqu'à 70%. Voltix Électricité conçoit des solutions d'éclairage LED adaptées à chaque espace : logements, bureaux, commerces, espaces extérieurs. Nous gérons le projet de A à Z, de l'étude lumière jusqu'à la mise en service, avec un retour sur investissement garanti.",
+    points: [
+      'Audit énergétique de l\'éclairage existant',
+      'Remplacement halogènes, fluorescents, néons',
+      'Éclairage d\'ambiance et spots encastrés',
+      'Éclairage extérieur et détection de mouvement',
+      'Économies jusqu\'à 70% sur la facture électrique',
+    ],
+  },
+  {
+    id: 'irve',
+    icon: `<rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>`,
+    iconStroke: true,
+    title: 'Bornes de Recharge IRVE',
+    price: 'Sur devis',
+    tag: 'VÉHICULE ÉLECTRIQUE',
+    desc: "Avec l'essor des véhicules électriques, disposer d'une borne de recharge à domicile est devenu indispensable. Voltix Électricité, certifié IRVE (Infrastructure de Recharge pour Véhicules Électriques), installe des bornes adaptées à votre véhicule et à votre installation électrique. Éligible au crédit d'impôt et aux aides de l'ADEME.",
+    points: [
+      'Borne 7,4 kW (mode 2) ou 22 kW (mode 3)',
+      'Marques : Hager, Schneider, Legrand, Wallbox',
+      'Éligible crédit d\'impôt et aide ADVENIR',
+      'Installation en maison individuelle et copropriété',
+      'Certification IRVE obligatoire fournie',
+    ],
+  },
+];
+---
+<Layout
+  title="Services Électriques Marseille — Dépannage, Tableau, Normes | Voltix"
+  description="Découvrez tous les services électriques de Voltix Électricité à Marseille : dépannage urgent, installation tableau, mise aux normes NF C 15-100, domotique, LED, IRVE."
+>
+
+  <!-- ── PAGE HERO ── -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="section-label">NOS PRESTATIONS</span>
+      <h1 class="page-hero-title">Services Électriques à Marseille</h1>
+      <p class="page-hero-sub">
+        Électricien certifié RGE — Dépannage, installation et mise aux normes dans les 16 arrondissements de Marseille.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── SERVICES LIST ── -->
+  <section class="section section--white">
+    <div class="container">
+      <div class="services-list">
+        {services.map((s, i) => (
+          <article id={s.id} class={`service-row ${i % 2 === 0 ? 'service-row--white' : 'service-row--light'}`}>
+            <div class="service-row-icon">
+              {s.iconStroke ? (
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="1.5" aria-hidden="true" set:html={s.icon}/>
+              ) : (
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" aria-hidden="true" set:html={s.icon}/>
+              )}
+            </div>
+            <div class="service-row-content">
+              <span class="service-row-tag">{s.tag}</span>
+              <h2 class="service-row-title">{s.title}</h2>
+              <p class="service-row-price">{s.price}</p>
+              <p class="service-row-desc">{s.desc}</p>
+              <ul class="service-row-points">
+                {s.points.map(point => (
+                  <li>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2.5" aria-hidden="true">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    {point}
+                  </li>
+                ))}
+              </ul>
+              <a href="/contact" class="btn btn--gradient service-row-cta">
+                Demander un devis gratuit →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="section section--dark" style="text-align:center;">
+    <div class="container">
+      <span class="section-label">URGENCE ÉLECTRIQUE</span>
+      <h2 class="section-title section-title--dark" style="max-width:640px;margin:0 auto 1rem;">
+        Besoin d'un électricien maintenant ?
+      </h2>
+      <p style="color:#94a3b8;margin-bottom:2.5rem;">Intervention sous 2h à Marseille, 24h/24 et 7j/7.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a href="tel:0491001122" class="btn btn--gradient" style="border-radius:50px;padding:.875rem 2rem;box-shadow:0 0 24px rgba(0,229,255,.35)">
+          ⚡ 04 91 00 11 22
+        </a>
+        <a href="/contact" class="btn btn--outline">Devis gratuit →</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+.page-hero {
+  background: #0a0f1e;
+  padding: 5rem 0 4rem;
+  border-bottom: 1px solid rgba(0,229,255,0.12);
+}
+.page-hero-title {
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  line-height: 1.15;
+}
+.page-hero-sub {
+  font-size: 1.0625rem;
+  color: #94a3b8;
+  max-width: 540px;
+}
+
+.services-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+.service-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 2.5rem;
+  padding: 2.5rem;
+  border-radius: var(--radius-card);
+  border-left: 4px solid #00e5ff;
+}
+.service-row--white { background: #ffffff; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+.service-row--light { background: #f8fafc; box-shadow: 0 2px 12px rgba(0,0,0,.04); }
+
+.service-row-icon {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 0.5rem;
+}
+.service-row-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #00e5ff;
+  margin-bottom: 0.5rem;
+}
+.service-row-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0a0f1e;
+  margin-bottom: 0.25rem;
+}
+.service-row-price {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #00e5ff;
+  margin-bottom: 1rem;
+}
+.service-row-desc {
+  color: #374151;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+.service-row-points {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+.service-row-points li {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.9rem;
+  color: #374151;
+}
+.service-row-cta { font-size: 0.9rem; }
+
+@media (max-width: 768px) {
+  .service-row {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .service-row-icon { justify-content: flex-start; }
+}
+</style>

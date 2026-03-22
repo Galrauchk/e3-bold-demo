@@ -1,0 +1,435 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonical?: string;
+  headExtra?: string;
+}
+
+const {
+  title,
+  description = "Voltix Électricité — Électricien certifié RGE à Marseille. Dépannage urgent 24h/7j, installation tableau électrique, mise aux normes NF C 15-100.",
+  canonical,
+} = Astro.props;
+
+const site = 'https://e3-bold-demo.netlify.app';
+const canonicalURL = canonical ?? (site + Astro.url.pathname);
+const pathname = Astro.url.pathname;
+
+const navLinks = [
+  { href: '/',               label: 'Accueil' },
+  { href: '/services',       label: 'Services' },
+  { href: '/a-propos',       label: 'À propos' },
+  { href: '/contact',        label: 'Contact' },
+];
+
+const isActive = (href: string) =>
+  href === '/' ? pathname === '/' : pathname.startsWith(href);
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "Electrician",
+  "name": "Voltix Électricité",
+  "description": "Électricien certifié RGE à Marseille. Dépannage urgent 24h/7j dans les 16 arrondissements.",
+  "url": site,
+  "telephone": "+33491001122",
+  "email": "contact@voltix-electricite.fr",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Marseille",
+    "postalCode": "13000",
+    "addressCountry": "FR"
+  },
+  "areaServed": {
+    "@type": "City",
+    "name": "Marseille"
+  },
+  "priceRange": "€€",
+  "openingHours": "Mo-Su 00:00-24:00",
+  "hasMap": "https://maps.google.com/?q=Marseille+13000"
+};
+---
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title}</title>
+  <link rel="canonical" href={canonicalURL} />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+  <slot name="head" />
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="site-header">
+  <div class="header-inner">
+    <!-- Logo -->
+    <a href="/" class="header-logo" aria-label="Voltix Électricité — Accueil">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="#00e5ff"/>
+      </svg>
+      <span class="logo-text">
+        <span class="logo-name">Voltix</span>
+        <span class="logo-sub">Électricité</span>
+      </span>
+    </a>
+
+    <!-- Checkbox for mobile toggle (CSS-only) -->
+    <input type="checkbox" id="nav-toggle" class="nav-checkbox" aria-hidden="true" />
+
+    <!-- Navigation -->
+    <nav class="header-nav" aria-label="Navigation principale">
+      {navLinks.map(link => (
+        <a href={link.href} class={`nav-link${isActive(link.href) ? ' nav-link--active' : ''}`}>
+          {link.label}
+        </a>
+      ))}
+      <!-- Mobile phone CTA -->
+      <a href="tel:0491001122" class="btn btn--gradient header-cta header-cta--mobile">
+        ⚡ 04 91 00 11 22
+      </a>
+    </nav>
+
+    <!-- Right side: phone CTA + hamburger -->
+    <div class="header-right">
+      <a href="tel:0491001122" class="btn btn--gradient header-cta header-cta--desktop">
+        ⚡ 04 91 00 11 22
+      </a>
+      <label for="nav-toggle" class="nav-hamburger" aria-label="Ouvrir le menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+    </div>
+  </div>
+</header>
+
+<!-- ── MAIN ── -->
+<main>
+  <slot />
+</main>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+
+    <!-- Col 1 — Brand -->
+    <div class="footer-col">
+      <a href="/" class="header-logo footer-logo" aria-label="Voltix Électricité">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="#00e5ff"/>
+        </svg>
+        <span class="logo-text">
+          <span class="logo-name">Voltix</span>
+          <span class="logo-sub">Électricité</span>
+        </span>
+      </a>
+      <p class="footer-desc">
+        Électricien certifié RGE à Marseille. Dépannage urgent, installation, mise aux normes dans les 16 arrondissements.
+      </p>
+    </div>
+
+    <!-- Col 2 — Navigation -->
+    <div class="footer-col">
+      <h3 class="footer-heading">Navigation</h3>
+      <ul class="footer-links">
+        {navLinks.map(link => (
+          <li><a href={link.href}>{link.label}</a></li>
+        ))}
+        <li><a href="/mentions-legales">Mentions légales</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 3 — Contact -->
+    <div class="footer-col">
+      <h3 class="footer-heading">Contact</h3>
+      <ul class="footer-contact">
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.14 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/>
+          </svg>
+          <a href="tel:0491001122">04 91 00 11 22</a>
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2" aria-hidden="true">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <a href="mailto:contact@voltix-electricite.fr">contact@voltix-electricite.fr</a>
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          <span>Marseille, 13000</span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <span>&copy; 2025 Voltix Électricité — Tous droits réservés</span>
+      <span class="footer-watermark">
+        Propulsé par <a href="https://webtrafic.fr" rel="noopener">WebTrafic</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- ── FLOATING CTA ── -->
+<div class="floating-cta-wrap">
+  <a href="tel:0491001122" class="floating-cta" aria-label="Appeler Voltix Électricité">
+    ⚡ 04 91 00 11 22
+  </a>
+</div>
+
+</body>
+</html>
+
+<style>
+/* ── HEADER ── */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #0a0f1e;
+  border-bottom: 1px solid rgba(0,229,255,0.12);
+  height: 68px;
+}
+.header-inner {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  position: relative;
+}
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.logo-name {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+.logo-sub {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #00e5ff;
+  letter-spacing: 0.05em;
+}
+
+/* Checkbox hidden */
+.nav-checkbox {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Nav desktop */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex: 1;
+  justify-content: center;
+}
+.nav-link {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  transition: color 0.2s;
+  padding: 0.25rem 0;
+}
+.nav-link:hover,
+.nav-link--active {
+  color: #ffffff;
+}
+.nav-link--active { color: #00e5ff; }
+
+/* Right side */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+.header-cta {
+  font-size: 0.875rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 20px rgba(0,229,255,0.25);
+}
+.header-cta--mobile { display: none; }
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+.nav-hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 2px;
+  transition: transform 0.2s;
+}
+
+/* ── Mobile nav ── */
+@media (max-width: 768px) {
+  .header-nav {
+    display: none;
+    position: absolute;
+    top: 68px;
+    left: 0;
+    right: 0;
+    background: #0a0f1e;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 1rem 1.5rem 1.5rem;
+    border-bottom: 1px solid rgba(0,229,255,0.12);
+    z-index: 99;
+  }
+  .nav-link {
+    width: 100%;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 1rem;
+  }
+  .header-cta--desktop { display: none; }
+  .header-cta--mobile {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+  .nav-hamburger { display: flex; }
+
+  /* Show nav when checkbox checked (CSS-only mobile menu) */
+  .nav-checkbox:checked ~ .header-nav { display: flex; }
+}
+
+/* ── FOOTER ── */
+.site-footer {
+  background: #0d1a3a;
+  border-top: 1px solid rgba(0,229,255,0.15);
+  padding-top: 4rem;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 3rem;
+}
+.footer-logo { margin-bottom: 1rem; }
+.footer-desc {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  margin-top: 0.75rem;
+}
+.footer-heading {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #00e5ff;
+  margin-bottom: 1rem;
+}
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.footer-links a {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: #ffffff; }
+.footer-contact {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.footer-contact li {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+.footer-contact a {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-contact a:hover { color: #ffffff; }
+.footer-bottom {
+  margin-top: 3rem;
+  border-top: 1px solid rgba(0,229,255,0.08);
+  padding: 1.25rem 0;
+}
+.footer-bottom-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.footer-bottom span {
+  color: rgba(255,255,255,0.4);
+  font-size: 0.8rem;
+}
+.footer-watermark a {
+  color: rgba(0,229,255,0.5);
+  text-decoration: none;
+  font-size: 0.8rem;
+  transition: color 0.2s;
+}
+.footer-watermark a:hover { color: #00e5ff; }
+
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .footer-bottom-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+</style>

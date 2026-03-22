@@ -1,17 +1,749 @@
 ---
+import Layout from '../layouts/Layout.astro';
 
+const faqItems = [
+  {
+    q: "Quel est le délai d'intervention pour un dépannage électrique à Marseille ?",
+    a: "Voltix Électricité intervient en urgence sous 2 heures dans tous les arrondissements de Marseille, 24h/24 et 7j/7. Pour les travaux planifiés, nous proposons des rendez-vous sous 48h selon disponibilité.",
+  },
+  {
+    q: "Êtes-vous certifié RGE pour les travaux électriques ?",
+    a: "Oui, Voltix Électricité est certifié RGE QualiElec. Cette certification garantit la qualité de nos prestations et vous permet de bénéficier des aides de l'État (MaPrimeRénov', CEE) pour vos travaux d'amélioration énergétique.",
+  },
+  {
+    q: "Quel est le coût d'une intervention électrique d'urgence ?",
+    a: "Nos tarifs pour une intervention d'urgence débutent à 89 € HT, diagnostic inclus. Un devis détaillé vous est remis avant tout travail supplémentaire. Pas de surprise : transparence totale sur les prix.",
+  },
+  {
+    q: "Intervenez-vous dans tous les arrondissements de Marseille ?",
+    a: "Oui, nous couvrons l'ensemble des 16 arrondissements de Marseille : du 1er au 16ème. Nos équipes sont basées à Marseille pour garantir des délais d'intervention optimaux.",
+  },
+  {
+    q: "Qu'est-ce que la norme NF C 15-100 et pourquoi est-elle importante ?",
+    a: "La NF C 15-100 est la norme française qui régit les installations électriques dans les bâtiments d'habitation. Son respect est obligatoire pour la sécurité des occupants et indispensable lors d'une vente ou d'une location immobilière.",
+  },
+  {
+    q: "Proposez-vous des devis gratuits pour les installations électriques ?",
+    a: "Absolument. Nous réalisons des devis gratuits et sans engagement pour toutes vos installations électriques : tableau, domotique, éclairage LED, borne IRVE. Le devis est détaillé et vous est remis dans les 24h suivant le diagnostic.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.a,
+    },
+  })),
+};
 ---
+<Layout
+  title="Voltix Électricité — Électricien certifié à Marseille | Urgence 24h/7j"
+  description="Électricien certifié RGE à Marseille. Dépannage urgent sous 2h, installation tableau électrique, mise aux normes NF C 15-100 dans les 16 arrondissements."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+  <!-- ══════════════════════════════════
+       HERO — Dark + SVG décoratifs
+  ══════════════════════════════════ -->
+  <section class="hero" aria-label="En-tête principal">
+    <!-- SVG Décoratifs inline -->
+    <svg class="deco deco-circle-lg" viewBox="0 0 600 600" fill="none" aria-hidden="true">
+      <circle cx="300" cy="300" r="280" stroke="#00e5ff" stroke-width="1.5" opacity="0.06"/>
+      <circle cx="300" cy="300" r="220" stroke="#00e5ff" stroke-width="1" opacity="0.04"/>
+    </svg>
+    <svg class="deco deco-circle-sm" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+      <circle cx="100" cy="100" r="90" fill="url(#grad-circle)" opacity="0.08"/>
+      <defs>
+        <radialGradient id="grad-circle">
+          <stop offset="0%" stop-color="#00e5ff"/>
+          <stop offset="100%" stop-color="#0066ff"/>
+        </radialGradient>
+      </defs>
+    </svg>
+    <svg class="deco deco-lines" viewBox="0 0 400 400" fill="none" aria-hidden="true">
+      <line x1="0" y1="50" x2="400" y2="450" stroke="#00e5ff" stroke-width="1" opacity="0.04"/>
+      <line x1="0" y1="120" x2="400" y2="520" stroke="#00e5ff" stroke-width="1" opacity="0.04"/>
+      <line x1="0" y1="190" x2="400" y2="590" stroke="#00e5ff" stroke-width="1" opacity="0.04"/>
+      <line x1="-60" y1="0" x2="340" y2="400" stroke="#00e5ff" stroke-width="1" opacity="0.03"/>
+    </svg>
+    <svg class="deco deco-dots" viewBox="0 0 200 200" fill="none" aria-hidden="true">
+      {Array.from({length: 5}).map((_, row) =>
+        Array.from({length: 5}).map((_, col) => (
+          <circle cx={col * 40 + 20} cy={row * 40 + 20} r="2" fill="#00e5ff" opacity="0.05"/>
+        ))
+      )}
+    </svg>
+
+    <div class="container hero-inner">
+      <span class="hero-label">⚡ ÉLECTRICIEN CERTIFIÉ RGE · MARSEILLE</span>
+      <h1 class="hero-title">
+        L'électricien qui intervient<br />
+        <span class="hero-title-accent">quand vous en avez besoin</span>
+      </h1>
+      <p class="hero-sub">
+        Dépannage urgent sous 2h dans les 16 arrondissements de Marseille.<br />
+        Certifié RGE QualiElec — Devis gratuit en 24h.
+      </p>
+      <div class="hero-ctas">
+        <a href="tel:0491001122" class="btn btn--gradient hero-cta-main">
+          ⚡ 04 91 00 11 22
+        </a>
+        <a href="/contact" class="btn btn--outline">
+          Devis gratuit →
+        </a>
+      </div>
+      <div class="hero-badges">
+        <span class="badge">✓ Certifié RGE</span>
+        <span class="badge">✓ NF C 15-100</span>
+        <span class="badge">✓ Assurance décennale</span>
+        <span class="badge">✓ Devis gratuit</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       STATS — Gradient pleine largeur
+  ══════════════════════════════════ -->
+  <section class="stats-band" aria-label="Chiffres clés">
+    <div class="container stats-grid">
+      <div class="stat-item">
+        <span class="stat-number">+500</span>
+        <span class="stat-label">Interventions/an</span>
+      </div>
+      <div class="stat-sep" aria-hidden="true"></div>
+      <div class="stat-item">
+        <span class="stat-number">16</span>
+        <span class="stat-label">Arrondissements</span>
+      </div>
+      <div class="stat-sep" aria-hidden="true"></div>
+      <div class="stat-item">
+        <span class="stat-number">4,9★</span>
+        <span class="stat-label">Avis clients</span>
+      </div>
+      <div class="stat-sep" aria-hidden="true"></div>
+      <div class="stat-item">
+        <span class="stat-number">24h</span>
+        <span class="stat-label">Disponibilité</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       SERVICES — Section blanche
+  ══════════════════════════════════ -->
+  <section class="section section--white" id="services" aria-labelledby="services-title">
+    <div class="container">
+      <div class="text-center section-intro">
+        <span class="section-label">NOS PRESTATIONS</span>
+        <h2 id="services-title" class="section-title section-title--light">
+          Services Électriques à Marseille
+        </h2>
+        <p class="section-body--light" style="max-width:600px;margin:0 auto;">
+          De l'urgence au projet complet, nos électriciens certifiés interviennent sur tout type de travaux électriques dans Marseille et ses arrondissements.
+        </p>
+      </div>
+
+      <div class="services-grid">
+
+        <!-- 1 — Dépannage urgent -->
+        <article class="service-card">
+          <div class="service-card-head">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="#00e5ff"/>
+            </svg>
+            <h3 class="service-title">Dépannage Électrique Urgent</h3>
+          </div>
+          <p class="service-desc">
+            Panne de courant, disjoncteur qui saute, court-circuit — nos techniciens interviennent sous 2h à Marseille, 24h/24 et 7j/7 pour rétablir votre installation en toute sécurité.
+          </p>
+          <p class="service-price">Dès 89 € HT</p>
+          <a href="/services#depannage" class="service-link">En savoir plus</a>
+        </article>
+
+        <!-- 2 — Tableau électrique -->
+        <article class="service-card">
+          <div class="service-card-head">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2" aria-hidden="true">
+              <rect x="2" y="3" width="20" height="18" rx="2"/><line x1="8" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/><line x1="2" y1="12" x2="22" y2="12"/>
+            </svg>
+            <h3 class="service-title">Installation Tableau Électrique</h3>
+          </div>
+          <p class="service-desc">
+            Remplacement ou installation de votre tableau électrique aux normes actuelles. Disjoncteurs différentiels, protection parafoudre, repérage des circuits — conformité garantie.
+          </p>
+          <p class="service-price">Sur devis</p>
+          <a href="/services#tableau" class="service-link">En savoir plus</a>
+        </article>
+
+        <!-- 3 — Mise aux normes -->
+        <article class="service-card">
+          <div class="service-card-head">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2" aria-hidden="true">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <h3 class="service-title">Mise aux Normes NF C 15-100</h3>
+          </div>
+          <p class="service-desc">
+            Diagnostic complet de votre installation, rapport de conformité et travaux de mise en conformité NF C 15-100. Indispensable pour la vente, la location ou après un contrôle CONSUEL.
+          </p>
+          <p class="service-price">Sur devis</p>
+          <a href="/services#normes" class="service-link">En savoir plus</a>
+        </article>
+
+        <!-- 4 — Domotique -->
+        <article class="service-card">
+          <div class="service-card-head">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2" aria-hidden="true">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            <h3 class="service-title">Domotique &amp; Automatismes</h3>
+          </div>
+          <p class="service-desc">
+            Pilotez votre maison intelligemment : volets roulants, éclairage connecté, thermostat intelligent, alarme intégrée. Installations compatibles avec les assistants vocaux et applications mobiles.
+          </p>
+          <p class="service-price">Sur devis</p>
+          <a href="/services#domotique" class="service-link">En savoir plus</a>
+        </article>
+
+        <!-- 5 — Éclairage LED -->
+        <article class="service-card">
+          <div class="service-card-head">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <h3 class="service-title">Éclairage LED Professionnel</h3>
+          </div>
+          <p class="service-desc">
+            Conception et installation d'éclairages LED basse consommation pour particuliers et professionnels. Économies d'énergie jusqu'à 70%, ambiances lumineuses personnalisées et longue durée de vie.
+          </p>
+          <p class="service-price">Dès 149 € HT</p>
+          <a href="/services#led" class="service-link">En savoir plus</a>
+        </article>
+
+        <!-- 6 — Borne IRVE -->
+        <article class="service-card">
+          <div class="service-card-head">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2" aria-hidden="true">
+              <rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+            <h3 class="service-title">Bornes de Recharge IRVE</h3>
+          </div>
+          <p class="service-desc">
+            Installation de bornes de recharge pour véhicules électriques (IRVE) à domicile et en entreprise. Certifié IRVE, éligible aux aides fiscales. Marques Hager, Schneider, Legrand.
+          </p>
+          <p class="service-price">Sur devis</p>
+          <a href="/services#irve" class="service-link">En savoir plus</a>
+        </article>
+
+      </div>
+
+      <div class="text-center" style="margin-top:3rem;">
+        <a href="/services" class="btn btn--gradient">Voir tous nos services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       CONFIANCE — Section dark
+  ══════════════════════════════════ -->
+  <section class="section section--dark" aria-labelledby="trust-title">
+    <div class="container">
+      <div class="text-center section-intro">
+        <span class="section-label">POURQUOI NOUS CHOISIR</span>
+        <h2 id="trust-title" class="section-title section-title--dark">
+          L'excellence électrique à Marseille
+        </h2>
+      </div>
+      <div class="trust-grid">
+        <div class="trust-card">
+          <svg class="trust-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="1.5" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <h3 class="trust-title">Rapidité</h3>
+          <p class="trust-desc">Intervention sous 2h sur Marseille, 24h/24 et 7j/7 pour toutes urgences électriques.</p>
+        </div>
+        <div class="trust-card">
+          <svg class="trust-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="1.5" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <h3 class="trust-title">Certifié</h3>
+          <p class="trust-desc">RGE QualiElec, NF C 15-100 — qualifications reconnues par l'État pour des travaux de qualité.</p>
+        </div>
+        <div class="trust-card">
+          <svg class="trust-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="1.5" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          <h3 class="trust-title">Garanti</h3>
+          <p class="trust-desc">Garantie 1 an sur toutes nos installations. Assurance décennale et responsabilité civile professionnelle.</p>
+        </div>
+        <div class="trust-card">
+          <svg class="trust-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="1.5" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+          </svg>
+          <h3 class="trust-title">Transparent</h3>
+          <p class="trust-desc">Devis détaillé avant toute intervention. Tarifs clairs, pas de frais cachés, facturation honnête.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       TÉMOIGNAGES — Section blanche
+  ══════════════════════════════════ -->
+  <section class="section section--white" aria-labelledby="reviews-title">
+    <div class="container">
+      <div class="text-center section-intro">
+        <span class="section-label">AVIS CLIENTS</span>
+        <h2 id="reviews-title" class="section-title section-title--light">
+          Ils nous font confiance à Marseille
+        </h2>
+      </div>
+      <div class="reviews-grid">
+
+        <article class="review-card">
+          <div class="review-stars" aria-label="5 étoiles">★★★★★</div>
+          <blockquote class="review-text">
+            "Intervention rapide après une panne totale dans mon appartement du 8ème. Le technicien est arrivé en moins d'une heure, a identifié et réparé le problème en 30 minutes. Très professionnel, explication claire du problème. Je recommande vivement !"
+          </blockquote>
+          <footer class="review-author">
+            <strong>Karim B.</strong>
+            <span class="review-city">Marseille 8ème — Mise aux normes</span>
+          </footer>
+        </article>
+
+        <article class="review-card">
+          <div class="review-stars" aria-label="5 étoiles">★★★★★</div>
+          <blockquote class="review-text">
+            "Remplacement complet du tableau électrique dans notre maison. Devis reçu en 24h, travaux réalisés proprement avec remise en état. Certifié CONSUEL, on a pu vendre notre maison sans souci. Tarif compétitif et équipe sérieuse."
+          </blockquote>
+          <footer class="review-author">
+            <strong>Sophie L.</strong>
+            <span class="review-city">Marseille 13ème — Tableau électrique</span>
+          </footer>
+        </article>
+
+        <article class="review-card">
+          <div class="review-stars" aria-label="5 étoiles">★★★★★</div>
+          <blockquote class="review-text">
+            "Installation domotique complète dans notre villa du 6ème : volets connectés, éclairage Philips Hue intégré, thermostat Netatmo. Parfaitement paramétré, tout fonctionne depuis l'application. Équipe ponctuelle et très compétente."
+          </blockquote>
+          <footer class="review-author">
+            <strong>Marc T.</strong>
+            <span class="review-city">Marseille 6ème — Domotique</span>
+          </footer>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       FAQ — Section blanche
+  ══════════════════════════════════ -->
+  <section class="section section--white" id="faq" aria-labelledby="faq-title">
+    <div class="container faq-container">
+      <div class="text-center section-intro">
+        <span class="section-label">QUESTIONS FRÉQUENTES</span>
+        <h2 id="faq-title" class="section-title section-title--light">
+          Tout savoir sur nos services électriques
+        </h2>
+      </div>
+      <div class="faq-list">
+        {faqItems.map((item) => (
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>{item.q}</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </summary>
+            <p class="faq-answer">{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════
+       CTA FINAL — Section dark
+  ══════════════════════════════════ -->
+  <section class="cta-final section--dark" aria-labelledby="cta-title">
+    <!-- Grand éclair décoratif -->
+    <svg class="cta-deco-bolt" viewBox="0 0 200 300" fill="none" aria-hidden="true">
+      <path d="M120 10L20 160h80L80 290l100-150h-80L120 10z" fill="#00e5ff" opacity="0.04"/>
+    </svg>
+    <div class="container cta-inner">
+      <span class="section-label">CONTACT &amp; URGENCE</span>
+      <h2 id="cta-title" class="section-title section-title--dark">
+        Un problème électrique à Marseille ?
+      </h2>
+      <p class="cta-sub">
+        Nos électriciens certifiés interviennent sous 2h dans les 16 arrondissements.
+      </p>
+      <div class="cta-buttons">
+        <a href="tel:0491001122" class="btn btn--gradient cta-btn-main">
+          ⚡ 04 91 00 11 22 — Urgence 24h/7j
+        </a>
+        <a href="/contact" class="btn btn--outline">
+          Demander un devis gratuit →
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+/* ── HERO ── */
+.hero {
+  background: #0a0f1e;
+  padding: 6rem 0 5rem;
+  position: relative;
+  overflow: hidden;
+}
+.deco {
+  position: absolute;
+  pointer-events: none;
+}
+.deco-circle-lg {
+  width: 520px; height: 520px;
+  top: -120px; right: -100px;
+}
+.deco-circle-sm {
+  width: 180px; height: 180px;
+  bottom: 60px; left: -40px;
+}
+.deco-lines {
+  width: 400px; height: 400px;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+}
+.deco-dots {
+  width: 220px; height: 220px;
+  top: 50%; right: 12%;
+  transform: translateY(-50%);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+}
+.hero-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #00e5ff;
+  margin-bottom: 1.25rem;
+}
+.hero-title {
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  max-width: 760px;
+}
+.hero-title-accent {
+  background: linear-gradient(135deg, #00e5ff, #0066ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-sub {
+  font-size: 1.125rem;
+  color: #94a3b8;
+  margin-bottom: 2.5rem;
+  max-width: 560px;
+  line-height: 1.65;
+}
+.hero-ctas {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+.hero-cta-main {
+  font-size: 1.0625rem;
+  padding: 0.875rem 2rem;
+  border-radius: 50px;
+  box-shadow: 0 0 28px rgba(0,229,255,0.35);
+}
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.badge {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(0,229,255,0.2);
+  border-radius: 6px;
+  padding: 0.4rem 0.875rem;
+}
+
+/* ── STATS ── */
+.stats-band {
+  background: linear-gradient(135deg, #00e5ff, #0066ff);
+  padding: 3rem 0;
+}
+.stats-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0 3rem;
+  flex: 1;
+  min-width: 140px;
+}
+.stat-number {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  color: #0a0f1e;
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(10,15,30,0.7);
+}
+.stat-sep {
+  width: 1px;
+  height: 48px;
+  background: rgba(255,255,255,0.3);
+  flex-shrink: 0;
+}
+
+/* ── SERVICES ── */
+.section-intro { margin-bottom: 3rem; }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+.service-card {
+  background: #ffffff;
+  border-left: 4px solid #00e5ff;
+  border-radius: 0 var(--radius-card) var(--radius-card) 0;
+  padding: 1.75rem 1.75rem 1.75rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.service-card:hover {
+  background: #f0fffe;
+  box-shadow: 0 4px 20px rgba(0,229,255,0.12);
+}
+.service-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  margin-bottom: 0.875rem;
+}
+.service-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #0a0f1e;
+}
+.service-desc {
+  color: #374151;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  margin-bottom: 0.875rem;
+}
+.service-price {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #00e5ff;
+  margin-bottom: 0.5rem;
+}
+.service-link {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0a0f1e;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.service-link:hover { color: #00e5ff; }
+
+/* ── TRUST ── */
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+.trust-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(0,229,255,0.1);
+  border-radius: var(--radius-card);
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+.trust-icon { margin: 0 auto 1rem; }
+.trust-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+.trust-desc {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  line-height: 1.6;
+}
+
+/* ── REVIEWS ── */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.review-card {
+  background: #ffffff;
+  border-top: 3px solid transparent;
+  border-image: linear-gradient(135deg, #00e5ff, #0066ff) 1;
+  border-radius: 0 0 var(--radius-card) var(--radius-card);
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+.review-stars {
+  color: #00e5ff;
+  font-size: 1.125rem;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+}
+.review-text {
+  font-style: italic;
+  color: #374151;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+  quotes: "\00AB" "\00BB";
+}
+.review-text::before { content: open-quote; }
+.review-text::after  { content: close-quote; }
+.review-author {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.review-author strong {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #0a0f1e;
+}
+.review-city {
+  font-size: 0.8rem;
+  color: #00e5ff;
+}
+
+/* ── FAQ ── */
+.faq-container { max-width: 760px; margin: 0 auto; }
+.faq-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.faq-item {
+  border: 1px solid #e5e7eb;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.125rem 1.25rem;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: #0a0f1e;
+  cursor: pointer;
+  list-style: none;
+  transition: background 0.15s;
+}
+.faq-question::-webkit-details-marker { display: none; }
+.faq-question:hover { background: #f0fffe; }
+.faq-chevron { flex-shrink: 0; transition: transform 0.2s; }
+details[open] .faq-chevron { transform: rotate(180deg); }
+.faq-answer {
+  padding: 0 1.25rem 1.125rem;
+  font-size: 0.9rem;
+  color: #374151;
+  line-height: 1.7;
+  border-top: 1px solid #f3f4f6;
+}
+
+/* ── CTA FINAL ── */
+.cta-final {
+  position: relative;
+  padding: 5rem 0;
+  overflow: hidden;
+  text-align: center;
+}
+.cta-deco-bolt {
+  position: absolute;
+  width: 240px;
+  height: 360px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.cta-inner {
+  position: relative;
+  z-index: 1;
+}
+.cta-sub {
+  font-size: 1.0625rem;
+  color: #00e5ff;
+  margin-bottom: 2.5rem;
+}
+.cta-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.cta-btn-main {
+  font-size: 1.0625rem;
+  padding: 0.9375rem 2.25rem;
+  border-radius: 50px;
+  box-shadow: 0 0 28px rgba(0,229,255,0.35);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .trust-grid { grid-template-columns: repeat(2, 1fr); }
+  .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .hero { padding: 4rem 0 3.5rem; }
+  .deco-circle-lg { width: 300px; height: 300px; right: -60px; top: -60px; }
+  .deco-dots { display: none; }
+  .hero-ctas { flex-direction: column; align-items: flex-start; }
+  .stat-sep { display: none; }
+  .stats-grid { gap: 1.5rem; }
+  .services-grid { grid-template-columns: 1fr; }
+  .trust-grid { grid-template-columns: repeat(2, 1fr); }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .cta-buttons { flex-direction: column; align-items: center; }
+}
+@media (max-width: 480px) {
+  .trust-grid { grid-template-columns: 1fr; }
+}
+</style>
