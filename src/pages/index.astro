@@ -42,11 +42,17 @@ const faqSchema = {
 };
 ---
 <Layout
-  title="Voltix Électricité — Électricien certifié à Marseille | Urgence 24h/7j"
+  title="Voltix Électricité - Électricien Marseille | Urgence 24h/7j"
   description="Électricien certifié RGE à Marseille. Dépannage urgent sous 2h, installation tableau électrique, mise aux normes NF C 15-100 dans les 16 arrondissements."
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Voltix Électricité",
+      "url": "https://e3-bold-demo.netlify.app"
+    })} />
   </Fragment>
 
   <!-- ══════════════════════════════════
