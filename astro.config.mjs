@@ -9,7 +9,11 @@ export default defineConfig({
   site: 'https://e3-bold-demo.netlify.app',
   integrations: [
     react(),
-    sitemap(),
+    sitemap({
+      filter: (page) =>
+        !page.includes('/politique-confidentialite') &&
+        !page.includes('/politique-cookies'),
+    }),
     robotsTxt(),
   ],
   vite: {
