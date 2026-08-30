@@ -4,6 +4,9 @@ import '@fontsource/inter/400.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import '@fontsource/inter/800.css';
+import ConsentTracking from '../components/ConsentTracking.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
+import LegalLinks from '../components/LegalLinks.astro';
 
 interface Props {
   title: string;
@@ -60,6 +63,7 @@ const localBusinessSchema = {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <ConsentTracking />
   <meta name="description" content={description} />
   <title>{title}</title>
   <meta name="robots" content="noindex,nofollow" />
@@ -164,7 +168,7 @@ const localBusinessSchema = {
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2" aria-hidden="true">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
           </svg>
-          <a href="mailto:contact@voltix-electricite.fr">contact@voltix-electricite.fr</a>
+          <a href="/contact">contact@voltix-electricite.fr</a>
         </li>
         <li>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2" aria-hidden="true">
@@ -183,9 +187,11 @@ const localBusinessSchema = {
       <span class="footer-watermark">
         Propulsé par <a href="https://webtrafic.fr" rel="noopener">WebTrafic</a>
       </span>
+      <LegalLinks includeMentions={false} />
     </div>
   </div>
 </footer>
+<ConsentBanner />
 
 <!-- ── FLOATING CTA ── -->
 <div class="floating-cta-wrap">
