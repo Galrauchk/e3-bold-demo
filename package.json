@@ -33,6 +33,6 @@
     "wrangler": "4.143.0"
   },
   "cloudflare": {
-    "domaine": "e3-bold-demo.netlify.app"
+    "domaine": "demo-bold.webtrafic.fr"
   }
 }
