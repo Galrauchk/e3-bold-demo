@@ -16,7 +16,7 @@ const ROBOTS_IA = [
 ];
 
 export default defineConfig({
-  site: 'https://e3-bold-demo.netlify.app',
+  site: 'https://demo-bold.webtrafic.fr',
   integrations: [
     react(),
     sitemap({
